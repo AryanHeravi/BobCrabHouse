@@ -152,7 +152,7 @@ sup {
 }
 
 a {
-  color: #000000;
+  color: #DA9F5B;
   text-decoration: none;
   background-color: transparent;
 }
@@ -3968,7 +3968,7 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  color: #0078f0;
+  color: #495057;
   background-color: #FFFBF2;
   border-color: #dee2e6 #dee2e6 #FFFBF2;
 }
