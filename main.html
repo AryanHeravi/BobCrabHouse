@@ -9,7 +9,7 @@
 <meta name="google-site-verification" content="xX2aVc6ZSzvcY9JHg9B_yammleXZUowtNw7AQO2o5x0">
 <meta name="theme-color" content="#0c0d0e">
 <link rel="canonical" href="https://bobscrabhouse.com/">
-<link rel="icon" href="img/crab_PNG39.png">
+<link rel="icon" href="/BobCrabHouse/img/crabb.jpg">
 
 <meta property="og:type" content="restaurant">
 <meta property="og:title" content="Bob's Crab House | Fresh Crab. Big Flavor.">
@@ -102,7 +102,7 @@ section{position:relative}
 .btn-ghost:hover{border-color:var(--ink);background:rgba(243,238,229,.08)}
 
 /* ---------- header ---------- */
-.nav{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .5s var(--ease),backdrop-filter .5s,padding .5s var(--ease),border-color .5s;border-bottom:1px solid transparent;padding:22px 0}
+.nav{position:fixed;inset:0 0 auto 0;z-index:140;transition:background .5s var(--ease),backdrop-filter .5s,padding .5s var(--ease),border-color .5s;border-bottom:1px solid transparent;padding:22px 0}
 .nav.scrolled{background:rgba(12,13,14,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:12px 0;border-color:var(--ink-faint)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px}
 .logo{display:flex;align-items:center;gap:12px;line-height:1}
@@ -353,6 +353,101 @@ footer{background:#08090a;padding:clamp(70px,8vw,110px) 0 40px;border-top:1px so
   .mbar a:first-child svg{stroke:var(--bg)}
   .menu-open .mbar{display:none}
 }
+.swipe-hint{display:none}
+.menu-open .nav{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-color:transparent}
+
+/* ---------- MOBILE-FIRST REFINEMENTS ---------- */
+@media (max-width:760px){
+  html{scroll-padding-top:72px}
+  *{-webkit-tap-highlight-color:transparent}
+  :root{--gutter:20px}
+
+  /* header: fits 360px screens */
+  .nav{padding:calc(10px + env(safe-area-inset-top)) 0 10px}
+  .nav.scrolled{padding:calc(8px + env(safe-area-inset-top)) 0 8px}
+  .logo{gap:10px;min-width:0}
+  .logo svg{width:30px;height:30px}
+  .logo-t{font-size:1rem;letter-spacing:.1em}
+  .logo-t small{font-size:.5rem;letter-spacing:.3em;margin-top:4px}
+  .burger{margin-right:-12px}
+
+  /* hero */
+  .hero{padding-bottom:96px}
+  .hero-media img{object-position:62% center}
+  .status{font-size:.64rem;letter-spacing:.14em;padding:9px 14px;margin-bottom:22px;line-height:1.4}
+  .hero .brandline{font-size:.68rem;letter-spacing:.32em;margin-bottom:14px}
+  .h-xl{font-size:clamp(3.5rem,17.5vw,4.8rem);line-height:.9}
+  .h-lg{font-size:clamp(2.5rem,12.5vw,3.6rem)}
+  .hero h1{margin-bottom:20px}
+  .hero p.sub{margin-bottom:28px;font-size:1.05rem}
+  .btn{min-height:56px}
+  .rv{transform:translateY(22px);transition-duration:.8s}
+
+  /* sections */
+  .intro{padding:84px 0 64px}
+  .intro .copy,.intro .quote{margin-top:30px}
+  .intro .quote{font-size:1.4rem;padding-left:20px}
+  .sec-head{margin-bottom:32px;gap:16px}
+  .seafood{padding:40px 0 76px}
+
+  /* swipe carousels */
+  .swipe-hint{display:flex;align-items:center;gap:12px;color:var(--ink-dim);font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;margin:-8px 0 16px}
+  .swipe-hint::after{content:"";width:34px;height:1px;background:var(--gold)}
+  .cards{scroll-padding-inline:var(--gutter);padding-bottom:14px}
+  .cards .rv{opacity:1;transform:none}
+  .card{width:80vw;height:clamp(400px,66svh,540px)}
+  .card-body{padding:22px}
+  .card h3{font-size:2.3rem}
+  .fav-track{scroll-padding-inline:var(--gutter)}
+  .fav-card{width:78vw}
+  .fav-card:nth-child(even){margin-top:0}
+  .fav-card h3{font-size:1.9rem}
+  .fav{padding:80px 0 60px}
+
+  /* story */
+  .story{padding:76px 0}
+  .story-photo{aspect-ratio:4/4.8}
+  .story-text .big{font-size:1.45rem}
+  .timeline{margin-top:36px}
+  .timeline b{font-size:1.7rem}
+  .timeline li{padding:16px 0}
+
+  /* menu: sticky tabs sit just under the header */
+  .menu{padding:70px 0 64px}
+  .tabs-wrap{top:calc(64px + env(safe-area-inset-top))}
+  .tabs{-webkit-mask-image:linear-gradient(90deg,#000 86%,transparent);mask-image:linear-gradient(90deg,#000 86%,transparent);padding-right:36px}
+  .tab{padding:18px 15px;font-size:.7rem}
+  .tab::after{left:15px;right:15px}
+  .menu-panel{padding-top:24px;gap:22px}
+  .menu-visual{aspect-ratio:16/9}
+  .menu-visual .cap{left:18px;bottom:16px}
+  .menu-visual .cap strong{font-size:2rem}
+  .group-label{margin-top:28px}
+  .item{padding:18px 0}
+  .item h3{font-size:1.35rem}
+  .item p{font-size:.92rem}
+  .menu-note{flex-direction:column;align-items:flex-start;gap:8px}
+
+  /* visit */
+  .visit{padding:70px 0}
+  .status-big{margin:22px 0 26px;font-size:2.2rem}
+  .days li{padding:15px 0}
+  .days li.today{padding-left:14px}
+  .addr{font-size:1.6rem}
+  .loc-col .cta-row .btn{flex:1 1 100%}
+
+  /* list, social, footer */
+  .list{padding:80px 0}
+  .social{padding:60px 0 76px}
+  footer{padding:64px 0 28px}
+  .foot-hours li{max-width:none}
+  .foot-bottom{margin-top:44px;flex-direction:column}
+}
+@media (max-width:360px){
+  .logo-t{font-size:.9rem;letter-spacing:.08em}
+  .logo-t small{display:none}
+  .tab{padding:18px 13px}
+}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .rv,.img-rv{opacity:1;transform:none;clip-path:none}
@@ -396,7 +491,7 @@ footer{background:#08090a;padding:clamp(70px,8vw,110px) 0 40px;border-top:1px so
 <!-- ============ HERO ============ -->
 <section class="hero" aria-label="Bob's Crab House">
   <div class="hero-media" id="heroMedia">
-    <img src="img/bobs%20homepage.jpg" alt="Fresh blue crab and seafood from Bob's Crab House in Jacksonville" fetchpriority="high">
+    <img src="/BobCrabHouse/img/pexels-jaradahfish-3753556.jpg" alt="Fresh blue crab and seafood from Bob's Crab House in Jacksonville" fetchpriority="high">
   </div>
   <div class="wrap hero-in">
     <div class="status js-status" role="status"><span class="dot"></span><span class="js-status-text">Checking hours…</span></div>
@@ -437,6 +532,7 @@ footer{background:#08090a;padding:clamp(70px,8vw,110px) 0 40px;border-top:1px so
       <p class="lede rv" style="--d:.1s">Live blue crab, cooked crab, shrimp, fish and oysters from our Jacksonville seafood counter.</p>
     </div>
 
+    <p class="swipe-hint" aria-hidden="true">Swipe</p>
     <div class="cards">
       <article class="card c1 rv">
         <img src="img/live%20crab.jpg" alt="Live big and meaty blue crab" loading="lazy" decoding="async" onerror="this.remove()">
@@ -841,7 +937,11 @@ footer{background:#08090a;padding:clamp(70px,8vw,110px) 0 40px;border-top:1px so
     panel.setAttribute('aria-labelledby','tab-'+id);
     if(instant){panel.innerHTML=render(c);return}
     panel.classList.add('swap');
-    setTimeout(function(){panel.innerHTML=render(c);panel.classList.remove('swap')},300);
+    setTimeout(function(){
+      panel.innerHTML=render(c);panel.classList.remove('swap');
+      var r=panel.getBoundingClientRect();
+      if(r.top<110){window.scrollTo({top:window.scrollY+r.top-150,behavior:'smooth'})}
+    },300);
   }
   MENU.forEach(function(c){
     var b=document.createElement('button');
@@ -878,7 +978,10 @@ footer{background:#08090a;padding:clamp(70px,8vw,110px) 0 40px;border-top:1px so
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function par(){
     var y=window.scrollY;
-    if(y<window.innerHeight*1.2&&!reduce){hm.style.transform='translate3d(0,'+(y*0.18)+'px,0)'}
+    if(y<window.innerHeight*1.2&&!reduce&&window.innerWidth>760){
+      var cap=hm.parentElement.offsetHeight*0.05;
+      hm.style.transform='translate3d(0,'+Math.min(y*0.18,cap)+'px,0)';
+    }
     onScroll();ticking=false;
   }
   window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(par)}},{passive:true});
