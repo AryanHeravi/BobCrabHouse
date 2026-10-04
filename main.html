@@ -9,17 +9,16 @@
 <meta name="google-site-verification" content="xX2aVc6ZSzvcY9JHg9B_yammleXZUowtNw7AQO2o5x0">
 <meta name="theme-color" content="#0c0d0e">
 <link rel="canonical" href="https://bobscrabhouse.com/">
-<link rel="icon" href="/BobCrabHouse/img/crabb.jpg">
+<link rel="icon" href="img/crabb.jpg">
 
 <meta property="og:type" content="restaurant">
 <meta property="og:title" content="Bob's Crab House | Fresh Crab. Big Flavor.">
 <meta property="og:description" content="Live and cooked blue crab, shrimp, fish and oysters. Serving Jacksonville since 2009.">
-<meta property="og:image" content="img/bobs%20homepage.jpg">
+<meta property="og:image" content="img/pexels-jaradahfish-3753556.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="img/bobs%20homepage.jpg">
 
 <script type="application/ld+json">
 {
@@ -29,7 +28,7 @@
   "description": "Live and cooked blue crab, shrimp, fish and oysters, serving Jacksonville since 2009.",
   "telephone": "+1-904-766-5200",
   "email": "Babak2005@AOL.com",
-  "image": "img/bobs%20homepage.jpg",
+  "image": "img/pexels-jaradahfish-3753556.jpg",
   "foundingDate": "2009",
   "address": {
     "@type": "PostalAddress",
@@ -187,8 +186,9 @@ section{position:relative}
 .story{padding:clamp(100px,14vw,200px) 0;overflow:hidden;background:var(--bg)}
 .story-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(24px,3vw,48px);align-items:start}
 .story-photo{grid-column:1/span 5;position:relative;aspect-ratio:4/5;background:linear-gradient(140deg,var(--ocean),#0a1b26);overflow:hidden}
-.story-photo img{width:100%;height:100%;object-fit:cover;filter:contrast(1.04) saturate(1.05)}
-.story-photo::after{content:"";position:absolute;inset:14px;border:1px solid rgba(243,238,229,.28);pointer-events:none}
+/* image is absolutely positioned so it always fills the frame */
+.story-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;filter:contrast(1.04) saturate(1.05)}
+.story-photo::after{content:"";position:absolute;inset:14px;border:1px solid rgba(243,238,229,.28);pointer-events:none;z-index:1}
 .story-tag{position:absolute;left:-1px;bottom:-1px;background:var(--bg);padding:18px 24px 0 0;font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-dim);z-index:2}
 .story-text{grid-column:7/-1;padding-top:clamp(0px,4vw,60px)}
 .story-text h2{margin:22px 0 32px}
@@ -212,7 +212,7 @@ section{position:relative}
 .menu-panel{display:grid;grid-template-columns:5fr 7fr;gap:clamp(28px,5vw,80px);padding-top:clamp(36px,5vw,64px);transition:opacity .35s var(--ease),transform .35s var(--ease)}
 .menu-panel.swap{opacity:0;transform:translateY(14px)}
 .menu-visual{position:sticky;top:150px;align-self:start;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(140deg,var(--ocean),#0a1b26)}
-.menu-visual img{width:100%;height:100%;object-fit:cover;filter:contrast(1.05)}
+.menu-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.05)}
 .menu-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(12,13,14,.85))}
 .menu-visual .cap{position:absolute;left:24px;bottom:22px;z-index:2}
 .menu-visual .cap small{display:block;font-size:.68rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
@@ -287,7 +287,7 @@ section{position:relative}
 .social{padding:clamp(70px,9vw,130px) 0 clamp(90px,11vw,160px);background:var(--bg-2)}
 .grid-ig{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(8px,1vw,14px)}
 .ig{position:relative;aspect-ratio:1;overflow:hidden;background:linear-gradient(140deg,var(--ocean),#0a1b26)}
-.ig img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),filter .6s;filter:contrast(1.05)}
+.ig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),filter .6s;filter:contrast(1.05)}
 .ig::after{content:"";position:absolute;inset:0;background:rgba(12,13,14,.35);opacity:1;transition:opacity .5s}
 .ig:hover::after{opacity:0}
 .ig:hover img{transform:scale(1.08)}
@@ -309,11 +309,11 @@ footer{background:#08090a;padding:clamp(70px,8vw,110px) 0 40px;border-top:1px so
 /* ---------- mobile bar ---------- */
 .mbar{display:none}
 
-/* ---------- reveal ---------- */
+/* ---------- reveal (fade + rise; no clip-path so images can never get stuck hidden) ---------- */
 .rv{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
 .rv.in{opacity:1;transform:none}
-.img-rv{clip-path:inset(0 0 100% 0);transition:clip-path 1.3s var(--ease);transition-delay:var(--d,0s)}
-.img-rv.in{clip-path:inset(0 0 0 0)}
+/* if JS is off or fails, never leave content invisible */
+.no-js .rv{opacity:1;transform:none}
 
 @media (max-width:1000px){
   .links,.nav .btn.desk{display:none}
@@ -450,11 +450,12 @@ footer{background:#08090a;padding:clamp(70px,8vw,110px) 0 40px;border-top:1px so
 }
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
-  .rv,.img-rv{opacity:1;transform:none;clip-path:none}
+  .rv{opacity:1;transform:none}
 }
 </style>
 </head>
-<body>
+<body class="no-js">
+<script>document.body.classList.remove('no-js')</script>
 <a class="skip" href="#menu">Skip to menu</a>
 
 <!-- ============ NAV ============ -->
@@ -561,8 +562,14 @@ footer{background:#08090a;padding:clamp(70px,8vw,110px) 0 40px;border-top:1px so
 <!-- ============ STORY ============ -->
 <section class="story" id="story" aria-labelledby="story-h">
   <div class="wrap story-grid">
-    <figure class="story-photo img-rv">
-      <img src="/BobCrabHouse/img/crabb.jpg" alt="Babak (Bob), owner of Bob's Crab House in Jacksonville" loading="lazy" decoding="async" onerror="this.remove()">
+    <!--
+      Owner photo. Relative path (works locally and on any host).
+      Tries babak1.png first, then babak1.jpg if the first one fails.
+      No lazy-loading and no clip-path reveal, so it can't get stuck hidden.
+    -->
+    <figure class="story-photo rv">
+      <img src="img/babak1.png" alt="Babak (Bob), owner of Bob's Crab House in Jacksonville" width="640" height="960"
+           onerror="if(!this.dataset.retry){this.dataset.retry='1';this.src='img/babak1.jpg';}">
       <figcaption class="story-tag">Babak “Bob” · Owner</figcaption>
     </figure>
     <div class="story-text">
@@ -710,7 +717,7 @@ footer{background:#08090a;padding:clamp(70px,8vw,110px) 0 40px;border-top:1px so
       <a class="ig rv" style="--d:.1s" href="https://www.facebook.com/pages/Bobs-Crab-House/151494368257330" target="_blank" rel="noopener" aria-label="Bob's Crab House on Facebook"><img src="img/Oysters_square.jpg" alt="Fresh oysters" loading="lazy" decoding="async" onerror="this.remove()"></a>
       <a class="ig rv" style="--d:.15s" href="https://www.facebook.com/pages/Bobs-Crab-House/151494368257330" target="_blank" rel="noopener" aria-label="Bob's Crab House on Facebook"><img src="img/Raw-Jumbo-Shrimp.jpg" alt="Jumbo shrimp" loading="lazy" decoding="async" onerror="this.remove()"></a>
       <a class="ig rv" style="--d:.2s" href="https://www.facebook.com/pages/Bobs-Crab-House/151494368257330" target="_blank" rel="noopener" aria-label="Bob's Crab House on Facebook"><img src="img/fish.jpg" alt="Fresh fish" loading="lazy" decoding="async" onerror="this.remove()"></a>
-      <a class="ig rv" style="--d:.25s" href="https://www.facebook.com/pages/Bobs-Crab-House/151494368257330" target="_blank" rel="noopener" aria-label="Bob's Crab House on Facebook"><img src="img/bobs%20homepage.jpg" alt="Bob's Crab House seafood spread" loading="lazy" decoding="async" onerror="this.remove()"></a>
+      <a class="ig rv" style="--d:.25s" href="https://www.facebook.com/pages/Bobs-Crab-House/151494368257330" target="_blank" rel="noopener" aria-label="Bob's Crab House on Facebook"><img src="img/pexels-jaradahfish-3753556.jpg" alt="Bob's Crab House seafood spread" loading="lazy" decoding="async" onerror="this.remove()"></a>
     </div>
   </div>
 </section>
@@ -822,10 +829,10 @@ footer{background:#08090a;padding:clamp(70px,8vw,110px) 0 40px;border-top:1px so
   }
   status(); setInterval(status,60000);
 
-  /* ---------- menu data (from existing site content) ---------- */
+  /* ---------- menu data ---------- */
   var IMG={
     crab:'img/live%20crab.jpg', cooked:'img/cooked%20crab.jpg', shrimp:'img/Raw-Jumbo-Shrimp.jpg',
-    fish:'img/fish.jpg', oyster:'img/Oysters_square.jpg', home:'img/bobs%20homepage.jpg'
+    fish:'img/fish.jpg', oyster:'img/Oysters_square.jpg', home:'img/pexels-jaradahfish-3753556.jpg'
   };
   var MENU=[
     {id:'crab',name:'Crab',img:IMG.crab,alt:'Live blue crab',groups:[
@@ -987,12 +994,14 @@ footer{background:#08090a;padding:clamp(70px,8vw,110px) 0 40px;border-top:1px so
   window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(par)}},{passive:true});
 
   /* ---------- reveal on scroll ---------- */
-  var els=document.querySelectorAll('.rv,.img-rv');
+  var els=document.querySelectorAll('.rv');
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){
       es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
     },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
     els.forEach(function(el){io.observe(el)});
+    /* safety net: after 3s, reveal anything still hidden */
+    setTimeout(function(){els.forEach(function(el){el.classList.add('in')})},3000);
   } else {els.forEach(function(el){el.classList.add('in')})}
 
   document.getElementById('yr').textContent=new Date().getFullYear();
