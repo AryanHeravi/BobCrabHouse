@@ -1,518 +1,784 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Bob's Crab House</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <meta content="Bobs-Crab-House" name="keywords">
-    <meta content="Bobs-Crab-House" name="description">
-    <meta name="google-site-verification" content="xX2aVc6ZSzvcY9JHg9B_yammleXZUowtNw7AQO2o5x0" />
-    <link rel="icon" type="image" href="/img/crab_PNG39.png">
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #031827;
+        }
 
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        /* =========================
+           LOADER
+        ========================= */
 
-    <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+        .loader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.min.css" rel="stylesheet">
+            background:
+                radial-gradient(
+                    ellipse at center 42%,
+                    #124c6b 0%,
+                    #082d43 38%,
+                    #031827 75%
+                );
 
+            transition:
+                opacity 0.8s ease,
+                visibility 0.8s ease;
+        }
+
+        .loader.finished {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* =========================
+           OCEAN GLOW
+        ========================= */
+
+        .ocean-glow {
+            position: absolute;
+            left: 50%;
+            top: 42%;
+
+            width: 130vw;
+            height: 45vh;
+
+            transform: translateX(-50%);
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    ellipse,
+                    rgba(91, 177, 207, 0.35),
+                    transparent 65%
+                );
+
+            filter: blur(20px);
+
+            animation: oceanGlow 7s ease-in-out infinite;
+        }
+
+        @keyframes oceanGlow {
+            0% {
+                transform: translateX(-50%) translateY(0) scaleX(1);
+            }
+
+            50% {
+                transform: translateX(-47%) translateY(-12px) scaleX(1.05);
+            }
+
+            100% {
+                transform: translateX(-50%) translateY(0) scaleX(1);
+            }
+        }
+
+        /* =========================
+           OCEAN WAVES
+        ========================= */
+
+        .waves {
+            position: absolute;
+            left: -10%;
+            bottom: -5%;
+            width: 120%;
+            height: 45%;
+            opacity: 0.18;
+        }
+
+        .wave {
+            position: absolute;
+            left: -5%;
+            width: 110%;
+            height: 100px;
+
+            border-top: 1px solid rgba(247, 240, 223, 0.6);
+            border-radius: 50%;
+
+            animation: waveMovement 7s ease-in-out infinite;
+        }
+
+        .wave:nth-child(1) {
+            bottom: 25%;
+        }
+
+        .wave:nth-child(2) {
+            bottom: 13%;
+            opacity: 0.65;
+            animation-delay: -2s;
+        }
+
+        .wave:nth-child(3) {
+            bottom: 2%;
+            opacity: 0.4;
+            animation-delay: -4s;
+        }
+
+        @keyframes waveMovement {
+            0% {
+                transform: translateX(-3%);
+            }
+
+            50% {
+                transform: translateX(3%);
+            }
+
+            100% {
+                transform: translateX(-3%);
+            }
+        }
+
+        /* =========================
+           PARTICLES
+        ========================= */
+
+        .particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+
+            width: 3px;
+            height: 3px;
+
+            border-radius: 50%;
+
+            background: rgba(247, 240, 223, 0.45);
+
+            animation: floatParticle 4s linear infinite;
+        }
+
+        .particle:nth-child(1) {
+            left: 12%;
+            bottom: 15%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            left: 23%;
+            bottom: 22%;
+            animation-delay: 1.2s;
+        }
+
+        .particle:nth-child(3) {
+            left: 36%;
+            bottom: 12%;
+            animation-delay: 0.5s;
+        }
+
+        .particle:nth-child(4) {
+            left: 49%;
+            bottom: 18%;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(5) {
+            left: 63%;
+            bottom: 14%;
+            animation-delay: 1s;
+        }
+
+        .particle:nth-child(6) {
+            left: 74%;
+            bottom: 24%;
+            animation-delay: 2.5s;
+        }
+
+        .particle:nth-child(7) {
+            left: 84%;
+            bottom: 16%;
+            animation-delay: 0.8s;
+        }
+
+        .particle:nth-child(8) {
+            left: 92%;
+            bottom: 21%;
+            animation-delay: 1.8s;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            25% {
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: translateY(-130px);
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .loader-content {
+            position: relative;
+            z-index: 10;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            width: 100%;
+            padding: 30px;
+        }
+
+        /* =========================
+           ESTABLISHED TEXT
+        ========================= */
+
+        .established {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+
+            margin-bottom: 25px;
+
+            opacity: 0;
+            transform: translateY(15px);
+
+            animation:
+                fadeUp 0.8s ease forwards 0.15s;
+        }
+
+        .established-line {
+            width: 45px;
+            height: 1px;
+
+            background: rgba(247, 240, 223, 0.5);
+        }
+
+        .established-text {
+            color: #f7f0df;
+
+            font-size: 10px;
+            font-weight: 600;
+
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+        }
+
+        /* =========================
+           LOGO
+        ========================= */
+
+        .logo-wrapper {
+            position: relative;
+
+            width: min(78vw, 480px);
+
+            opacity: 0;
+            transform: scale(0.82) translateY(20px);
+
+            animation:
+                logoEnter 1.2s cubic-bezier(.16, 1, .3, 1) forwards 0.15s;
+        }
+
+        .logo-glow {
+            position: absolute;
+            inset: 15%;
+
+            background: rgba(213, 151, 54, 0.15);
+
+            border-radius: 50%;
+
+            filter: blur(45px);
+
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+
+        .logo {
+            position: relative;
+            z-index: 2;
+
+            display: block;
+
+            width: 100%;
+            height: auto;
+
+            filter:
+                drop-shadow(0 25px 45px rgba(0, 0, 0, 0.55));
+        }
+
+        @keyframes logoEnter {
+            0% {
+                opacity: 0;
+                transform: scale(0.82) translateY(20px);
+                filter: blur(8px);
+            }
+
+            60% {
+                opacity: 1;
+                filter: blur(0);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes logoGlow {
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: scale(0.95);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.08);
+            }
+        }
+
+        /* =========================
+           TAGLINE
+        ========================= */
+
+        .tagline {
+            margin-top: 24px;
+
+            text-align: center;
+
+            opacity: 0;
+            transform: translateY(12px);
+
+            animation:
+                fadeUp 0.8s ease forwards 0.85s;
+        }
+
+        .tagline-main {
+            color: #f7f0df;
+
+            font-size: 11px;
+            font-weight: 600;
+
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+        }
+
+        .tagline-sub {
+            margin-top: 9px;
+
+            color: rgba(247, 240, 223, 0.48);
+
+            font-size: 13px;
+            font-weight: 300;
+
+            letter-spacing: 0.08em;
+        }
+
+        /* =========================
+           LOADING BAR
+        ========================= */
+
+        .loading-container {
+            width: min(270px, 75vw);
+
+            margin-top: 38px;
+
+            opacity: 0;
+            transform: translateY(10px);
+
+            animation:
+                fadeUp 0.8s ease forwards 1s;
+        }
+
+        .loading-info {
+            display: flex;
+            justify-content: space-between;
+
+            margin-bottom: 10px;
+        }
+
+        .loading-label,
+        .loading-percent {
+            color: rgba(247, 240, 223, 0.45);
+
+            font-size: 9px;
+            font-weight: 500;
+
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+        }
+
+        .loading-track {
+            position: relative;
+
+            width: 100%;
+            height: 2px;
+
+            overflow: hidden;
+
+            background: rgba(247, 240, 223, 0.14);
+        }
+
+        .loading-progress {
+            position: absolute;
+            left: 0;
+            top: 0;
+
+            width: 0%;
+            height: 100%;
+
+            background: #f7f0df;
+
+            box-shadow:
+                0 0 10px rgba(247, 240, 223, 0.5);
+
+            animation: loadingProgress 3s linear forwards;
+        }
+
+        @keyframes loadingProgress {
+            from {
+                width: 0%;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        /* =========================
+           BOTTOM BRAND
+        ========================= */
+
+        .bottom-brand {
+            position: absolute;
+
+            bottom: 28px;
+            left: 0;
+
+            width: 100%;
+
+            text-align: center;
+
+            opacity: 0;
+
+            animation:
+                fadeIn 1s ease forwards 1.3s;
+        }
+
+        .bottom-brand span {
+            color: rgba(247, 240, 223, 0.3);
+
+            font-size: 9px;
+            font-weight: 500;
+
+            letter-spacing: 0.45em;
+            text-transform: uppercase;
+        }
+
+        /* =========================
+           GENERIC ANIMATIONS
+        ========================= */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .logo-wrapper {
+                width: min(88vw, 430px);
+            }
+
+            .established {
+                margin-bottom: 15px;
+            }
+
+            .established-text {
+                font-size: 8px;
+                letter-spacing: 0.25em;
+            }
+
+            .established-line {
+                width: 30px;
+            }
+
+            .tagline-main {
+                font-size: 9px;
+                letter-spacing: 0.3em;
+            }
+
+            .tagline-sub {
+                font-size: 11px;
+            }
+
+            .loading-container {
+                margin-top: 30px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Carousel Start -->
-    <div class="container-fluid p-0 mb-5">
-        <div id="blog-carousel" class="carousel slide overlay-bottom" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="w-100" src="img/bobs homepage.jpg" alt="Image">
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <h2 class="text-primary font-weight-medium m-0">Bob Has Been Serving</h2>
-                        <h1 class="display-1 text-white m-0">Crab & Seafood</h1>
-                        <h3 style="color: wheat ;" class="display-4">*Serving Since 2009*</h1>
-                    </div>
-                </div>
-            </div>
+    <!-- =========================
+         LOADING SCREEN
+    ========================= -->
+
+    <div class="loader" id="loader">
+
+        <!-- Ocean atmosphere -->
+        <div class="ocean-glow"></div>
+
+        <!-- Animated waves -->
+        <div class="waves">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
         </div>
+
+        <!-- Floating particles -->
+        <div class="particles">
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+            <span class="particle"></span>
+        </div>
+
+
+        <!-- Main content -->
+        <div class="loader-content">
+
+            <!-- Established -->
+            <div class="established">
+
+                <div class="established-line"></div>
+
+                <span class="established-text">
+                    Est. 2009
+                </span>
+
+                <div class="established-line"></div>
+
+            </div>
+
+
+            <!-- Logo -->
+            <div class="logo-wrapper">
+
+                <div class="logo-glow"></div>
+
+                <img
+                    src="/BobCrabHouse/image/logo.png"
+                    alt="Bob's Crab House"
+                    class="logo"
+                >
+
+            </div>
+
+
+            <!-- Tagline -->
+            <div class="tagline">
+
+                <div class="tagline-main">
+                    Fresh From The Coast
+                </div>
+
+                <div class="tagline-sub">
+                    Get ready to crack into something good.
+                </div>
+
+            </div>
+
+
+            <!-- Loading -->
+            <div class="loading-container">
+
+                <div class="loading-info">
+
+                    <span class="loading-label">
+                        Preparing the catch
+                    </span>
+
+                    <span
+                        class="loading-percent"
+                        id="percentage"
+                    >
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="loading-track">
+
+                    <div
+                        class="loading-progress"
+                        id="progress"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Bottom -->
+        <div class="bottom-brand">
+
+            <span>
+                Bob's Crab House
+            </span>
+
+        </div>
+
     </div>
-    <!-- Carousel End -->
 
-    <ul class="nav nav-pills nav-fill">
-        <li class="nav-item">
-        <a class="smoothscroll" style="font-size: 20px ;"  href="#about" title="">About</a>
-        </li>
-        <li class="nav-item">
-        <a class="smoothscroll"  style="font-size: 20px ;"  href="#service" title="">Our Services</a>
-        </li>
-        <li class="nav-item">
-        <a class="smoothscroll"  style="font-size: 20px ;"  href="#menu" title="">Menu</a>
-        </li>
-        <li class="nav-item">
-            <a class="smoothscroll" style="font-size: 20px ;"  href="#contact" title="">Contact</a>
-            </li>
-    </ul>    	
-    	
 
-    <!-- About Start -->
-    <section id="about"> 
-    <div class="container-fluid py-5">
-        <div class="container">
-            <div class="section-title">
-                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">About Us</h4>
-                <h1 class="display-4">"We're Not Fancy, We Care About Quality"</h1>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 py-0 py-lg-5">
-                    <h1 class="mb-3" style="text-decoration: underline ;">Our Story</h1>
-                    <h5 class="mb-3" style="font-size: 25px ;">Babak (Bob) started his business in the northside of Jacksonville
-                         with a vision of serving the community Crab & Seafood. 
-                         <br><br>
-                         Since 2009, Bob has been providing excellent customer service, and displaying his knowledge of Crab & Seafood to his customers. </h5>
-                    
-                    
-                </div>
-                <div class="col-lg-4 py-5 py-lg-0" style="min-height: 500px;">
-                    <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100 w3-round-xxlarge" src="/img/19060062_10154864439859542_204931284162492427_n.jpg" style="object-fit: cover;">
-                    </div>
-                </div>
-                <div class="col-lg-4 py-0 py-lg-5">
-                    <h1 class="mb-3" style="text-decoration: underline ;">About Bob</h1>
-                    <h5 class="mb-3" style="font-size: 25px ;">
-                    Bob (Babak) was born in 1972, in Iran. He moved to America as a refugee in 2001. He worked
-                    multiple jobs until he found his passion for crab and seafood. In 2009, Bob opened up Bob's Crab House.
-                    </h5>
-                    
-                    
-                </div>
-            </div>
-            <br><br><br><br>
-            <div style="border: 3px solid black;">
-                <h3 style="padding: 40px; text-align: center;">Subscribe to our mailing system now to ensure you never miss out on our exclusive offers and discounts, available every month. 
-                    Stay in the loop and be the first to receive our fantastic deals and promotions!</h3>
-                    <a href="https://mailchi.mp/50917169c5ac/bobs-crab-house" class="w3-btn w3-green w3-center" style="display: flex;justify-content: center;align-items: center;">Subscribe</a>
-            </div>
-        </div>
-        
-    </div>
-    <!-- About End -->
-    
-    
-    
+    <!-- =========================
+         YOUR WEBSITE
+    ========================= -->
 
+    <main id="website">
 
+        <!--
+            Put your actual website here.
+            The loader will disappear after 3 seconds.
+        -->
 
-    <!-- Service Start -->
-    <section id="service">  
-    <div class="container-fluid pt-5">
-        <div class="container">
-            <div class="section-title">
-                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Our Services</h4>
-                <h1 class="display-4">Crab & Seafood</h1>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 mb-5">
-                    <div class="row align-items-center">
-                        <div class="col-sm-5">
-                            <img class="img-fluid mb-3 mb-sm-0" src="/img/live crab.jpg" alt="">
-                        </div>
-                        <div class="col-sm-7">
-                            <h3>Live Crab</h3>
-                            <p class="m-0" style="font-size: 18px ;">We here at Bob's Crab house sell big and meaty Blue Crab.
-                                <br><br>
-                                We get Live Blue Crab Daily, with variety of different sizes, ranging from 
-                                "Small to Extra Jumbo"
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-5">
-                    <div class="row align-items-center">
-                        <div class="col-sm-5">
-                            <img class="img-fluid mb-3 mb-sm-0" src="/img/cooked crab.jpg" alt="">
-                        </div>
-                        <div class="col-sm-7">
-                            <h3>Cooked Crab</h3>
-                            <p class="m-0" style="font-size: 18px ;">We provide our customers with full and cleaned cooked crab; they are cooked daily</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-5">
-                    <div class="row align-items-center">
-                        <div class="col-sm-5">
-                            <img class="img-fluid mb-3 mb-sm-0" src="/img/Raw-Jumbo-Shrimp.jpg" alt="">
-                        </div>
-                        <div class="col-sm-7">
-                            <h3>Shrimp</h3>
-                            <p class="m-0" style="font-size: 18px ;">We have 2 varieties of Shrimp, <br> <strong>"Large & Jumbo"</strong>  <br> (sold per pound)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-5">
-                    <div class="row align-items-center">
-                        <div class="col-sm-5">
-                            <img class="img-fluid mb-3 mb-sm-0" src="/img/fish.jpg" alt="">
-                        </div>
-                        <div class="col-sm-7">
-                            <h3>Fish</h3>
-                            <p class="m-0" style="font-size: 18px ;">We at Bob's Crab House provide two types of Fish, <strong>"Whiting and Atlantic Croaker"</strong></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-5">
-                    <div class="row align-items-center">
-                        <div class="col-sm-5">
-                            <img class="img-fluid mb-3 mb-sm-0" src="/img/Oysters_square.jpg" alt="">
-                        </div>
-                        <div class="col-sm-7">
-                            <h3>Oysters</h3>
-                            <p class="m-0" style="font-size: 18px ;">We provide large and heavy Oysters that are full of meat</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Service End -->
+        <h1>Your Website</h1>
 
+    </main>
 
-    
-
-
-    <!-- Menu Start -->
-    <div class="w3-container" id="menu">
-        <div class="w3-content" style="max-width:1400px">
-  
-            <div class="section-title">
-                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Our Menu</h4>
-                <h1 class="display-4">All</h1>
-            </div>
-  
-          <div class="w3-row w3-center w3-card w3-padding w3-hover-grayscale">
-            <a href="javascript:void(0)" onclick="openMenu(event, 'Live Items');" >
-              <div class="w3-col s6 tablink" style="font-size: 25px ;">Live Items</div>
-            </a>
-            <a href="javascript:void(0)" onclick="openMenu(event, 'Cooked Items');">
-              <div class="w3-col s6 tablink" style="font-size: 25px ;">Cooked Items</div>
-            </a>
-            <br><br>
-            <a href="javascript:void(0)" onclick="openMenu(event, 'Frozen Items');">
-                <div class="w3-col s6 tablink" style="font-size: 25px ;">Frozen Items</div>
-            </a>
-            <a href="javascript:void(0)" onclick="openMenu(event, 'Spices');">
-                <div class="w3-col s6 tablink" style="font-size: 25px ;">Spices</div>
-            </a>
-          </div>
-  
-          <div id="Live Items" class="w3-container menu w3-padding-48 w3-card w3-center">
-            <h2>CRAB</h2>
-            <hr>
-            <h5>Mixed Crab</h5>
-            <p class="w3-text-grey">Variety Of Sizes Of Crab</p><br>
-  
-            <h5>Small Crab</h5>
-            <p class="w3-text-grey">Only Providing Small Sized Crab</p><br>
-  
-            <h5>Medium Crab</h5>
-            <p class="w3-text-grey">Only Providing Medium Sized Crab</p><br>
-  
-            <h5>Large Crab</h5>
-            <p class="w3-text-grey">Only Providing Large Sized Crab</p><br>
-  
-            <h5>Jumbo Crab</h5>
-            <p class="w3-text-grey">Only Providing Jumbo Sized Crab</p><br>
-            <h5>Extra Jumbo Crab</h5>
-            <p class="w3-text-grey">Only Providing Extra Jumbo Sized Crab</p><br>
-            <h2>OYSTERS</h2>
-            <hr>
-            <h5>Bushel Of Oysters</h5>
-            <p class="w3-text-grey">Weight: Between 45 - 60 pounds</p><br>
-            <h5>1/2 of Oysters</h5>
-            <p class="w3-text-grey">Weight: Between 30 - 45 pounds</p><br>
-            <h5>1/4 of Oysters</h5>
-            <p class="w3-text-grey">Weight: Between 15 - 30 pounds</p>
-          </div>
-  
-          <div id="Cooked Items" class="w3-container menu w3-padding-48 w3-card w3-center">
-
-            <h2>TRAYS</h2>
-            <hr>
-
-            <h5>Garlic Crab Tray</h5>
-            <p class="w3-text-grey">A Well Portioned Tray of Blue Crab</p><br>
-  
-            <h5>Snow Crab Tray</h5>
-            <p class="w3-text-grey">A Well Portioned Tray of Snow Crab</p><br>
-  
-            <h5>Dungeness Crab</h5>
-            <p class="w3-text-grey"></p><br>
-  
-            <h5>Shrimp Tray</h5>
-            <p class="w3-text-grey">A Medium Tray Filled With Big Juicy Shrimp</p><br>
-  
-            <h5>Shrimp Cup</h5>
-            <p class="w3-text-grey">A Cup Filled With Big Juicy Shrimp</p><br>
-
-            <h2>COMBO</h2>
-            <hr>
-
-            <h5>Crab Combo</h5>
-            <p class="w3-text-grey">A good amount of Crab, One Egg, One Corn, One Potato, and Shrimp</p><br>
-
-            <h5> Shrimp Combo</h5>
-            <p class="w3-text-grey">A good amount of Shrimp, One Egg, One Corn, One Potato</p><br>
-
-            <h5>Snow Crab Combo</h5>
-            <p class="w3-text-grey">A good amount of Snow Crab, One Egg, One Corn, One Potato, and Shrimp</p><br>
-
-            <h2>BOILED CRAB</h2>
-            <hr>
-
-            <h5>Jumbo Boil Crab</h5>
-            <p class="w3-text-grey">5 to 6 Fully Boiled Jumbo Crab</p><br>
-
-            <h2>SIDES</h2>
-            <hr>
-
-            <h5>Potatoes</h5>
-            <p class="w3-text-grey">Well Cooked, Well Seasoned Half Potato</p><br>
-
-            <h5>Eggs</h5>
-            <p class="w3-text-grey">Boiled Egg</p><br>
-
-            <h5>Sausage</h5>
-            <p class="w3-text-grey">A Well Sized Sausage</p><br>
-
-            <h5>Corn</h5>
-            <p class="w3-text-grey">A Nice Size Piece of Corn</p>
-          </div>
-
-
-          <div id="Frozen Items" class="w3-container menu w3-padding-48 w3-card w3-center">
-            <h2>FISH</h2>
-            <h5>Atlantic Croaker</h5>
-            <p class="w3-text-grey">Croaker makes for good eats when it's fried, but baking this fish helps to bring out its natural flavor.</p><br>
-  
-            <h5>Whiting</h5>
-            <p class="w3-text-grey">A white, round sea fish, whiting is a small member of the cod family</p><br>
-
-            <h2>CRAB</h2>
-  
-            <h5>Snow Crab</h5>
-            <p class="w3-text-grey">The snow crab has a sweet, slightly briny flavor and a firm texture.</p><br>
-
-            <h5>Dungeness Crab</h5>
-            <p class="w3-text-grey">One of the most popular types of crab for eating is the Dungeness crab. </p><br>
-
-            <h5>Crawfish</h5>
-            <p class="w3-text-grey">Well Portioned Crawfish</p>
-
-            <h2>SHRIMP</h2>
-  
-            <h5>Large Shrimp</h5>
-            <p class="w3-text-grey">Good Quality Large Shrimp</p><br>
-  
-            <h5>Jumbo Shrimp</h5>
-            <p class="w3-text-grey">Good Quality Jumbo Shrimp</p><br>
-
-            <h2>Mussels</h2>
-
-            <h5>Blue Mussel</h5>
-            <p class="w3-text-grey">Well Portioned Blue Mussel</p><br>
-
-            <h5>Green Mussel</h5>
-            <p class="w3-text-grey">Well Portioned Green Mussel</p><br>
-
-            <h2>SIDES</h2>
-
-            <h5>Sausage</h5>
-            <p class="w3-text-grey">A Well Sized Sausage</p><br>
-
-            <h5>Corn</h5>
-            <p class="w3-text-grey">A Nice Size Piece of Corn</p>
-
-            
-            
-          </div>
-          <div id="Spices" class="w3-container menu w3-padding-48 w3-card w3-center">
-
-            <h2>POWDER</h2>
-
-            <h5>Garlic Seafood Boil</h5>
-            <p class="w3-text-grey">This Product comes in 2 sizes. (NET WEIGHT 1LB and 8 OZ)</p><br>
-
-            <h5>Florida Seafood Seasoning (Crab & Shrimp Boil)</h5>
-            <p class="w3-text-grey">Our Top Seller <br>
-                This Product comes in 2 sizes. (NET WEIGHT 1LB and 8 OZ)
-            </p><br>
-
-            <h5>Louisiana (Cajun Cripsy Fish Fry)</h5>
-            <p class="w3-text-grey">Seafood Breading Mix</p><br>
-
-            <h5>Louisiana (New Orleans Style Fish Fry)</h5>
-            <p class="w3-text-grey">Seafood Breading Mix <br>
-                This Product comes in 2 sizes. (NET WEIGHT 5LB and 1LB)
-            </p><br>
-
-            <h5>Louisiana (Seasoned Crispy Fish Fry)</h5>
-            <p class="w3-text-grey">Seafood Breading Mix <br>
-                This Product comes in 2 sizes. (NET WEIGHT 5LB and 1LB)
-            </p><br>
-
-            <h5>Louisiana (Seasoned Crispy Shrimp Fry)</h5>
-            <p class="w3-text-grey">Seafood Batter Mix</p><br>
-
-            <h5>Louisiana (Crawfish Shrimp & Crab Boil)</h5>
-            <p class="w3-text-grey">This Product comes in 4 sizes. (NET WEIGHT 5LB, 1LB, 8 OZ, and 3 OZ)</p><br>
-
-            <h5>Louisiana (Boil Booster)</h5>
-            <p class="w3-text-grey">Zesty Citrus</p><br>
-
-            <h5>Louisiana (Boil Booster)</h5>
-            <p class="w3-text-grey">Herbal Overload</p><br>
-
-            <h5>Louisiana (Boil Booster)</h5>
-            <p class="w3-text-grey">Smashed Garlic</p><br>
-
-            <h5>Slap Your Mama (Cajun Seafood Boil)</h5>
-            <p class="w3-text-grey">This Product comes in 2 sizes. (NET WEIGHT 1LB and 8 OZ)</p><br>
-
-            <h5>Swamp Fire (Seafood Boil)</h5>
-            <p class="w3-text-grey">One of Bob's Favourites</p><br>
-
-            <h5>Old Bay Seasoning</h5>
-            <p class="w3-text-grey">For Seafood, Poultry, Salads, Meats</p><br>
-
-            <h5>Louisiana (Cajun Fire)</h5>
-            <p class="w3-text-grey">Crawfish, Shrimp, and Crab Boil</p><br>
-
-            <h5>Cayenne Pepper</h5>
-            <p class="w3-text-grey">Great On Everything</p><br>
-
-            <h2>LIQUID</h2>
-
-            <h5>Lemon Juice</h5>
-            <p class="w3-text-grey">Great On Everything</p><br>
-
-            <h5>Louisiana Hot Sauce</h5>
-            <p class="w3-text-grey">Mild/Spicy</p><br>
-
-            <h5>Louisiana Concentrated Boil</h5>
-            <p class="w3-text-grey">Best on Shrimp and Crab <br>
-                This Product comes in 2 sizes. (NET WEIGHT 4 fl OZ and 8 fl OZ)
-            </p><br>
-  
-            
-          </div>
-        </div>
-      </div>
-    <!-- Menu End -->
-
-
-    
-
-
-   
-
-
-    <!-- Footer Start -->
-    <section id="contact"> 
-    <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
-        <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Get In Touch</h4>
-                <p><a style="color: white;"   href="https://www.google.com/maps/place/9943+Lem+Turner+Rd,+Jacksonville,+FL+32208/@30.4161291,-81.6986123,17z/data=!3m1!4b1!4m5!3m4!1s0x88e5ba9c7e66d0ad:0xeea926d911efa8a3!8m2!3d30.4161291!4d-81.6964236">9943 Lem Turner Rd, Jacksonville, FL 32208, United States</a></p>
-                <p><i></i>+1 904-766-5200</p>
-                <p  class="m-0"><a style="color: white ;" href = "mailto: Babak2005@AOL.com">Babak2005@AOL.com</a></p>
-                <br>
-                <a href="https://mailchi.mp/50917169c5ac/bobs-crab-house" class="w3-btn w3-green w3-center">Subscribe</a>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Follow Us</h4>
-                
-                <div class="d-flex justify-content-start">
-                    
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="https://www.facebook.com/pages/Bobs-Crab-House/151494368257330"><i class="fab fa-facebook-f"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Open Hours:</h4>
-                <div>
-                    <h6 class="text-white text-uppercase">Thursday: <br><br>	11a.m.- 7p.m.<br><br></h6>
-                    <h6 class="text-white text-uppercase">Friday:	<br><br>10a.m.- 7p.m.<br><br></h6>
-                    <h6 class="text-white text-uppercase">Saturday:	<br><br>9a.m.- 7p.m.<br><br></h6>  
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                
-                <div>
-
-                    <h6 class="text-white text-uppercase">Sunday:	<br><br>9a.m.- 5p.m.<br><br></h6>
-                    <h6 class="text-white text-uppercase">Monday:	<br><br>11a.m.- 7p.m.<br><br></h6>
-                    <h6 class="text-white text-uppercase">Tuesday:	<br><br>11a.m.- 7p.m.<br><br></h6>
-                    <h6 class="text-white text-uppercase">Wednesday:<br><br>	Closed</h6>
-                    
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
-            <p>Design and Developed by Aryan Heravi</p>
-    
-        </div>
-    </div>
-    <!-- Footer End -->
-
-
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
-
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-    <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
 
     <script>
-        // Tabbed Menu
-        function openMenu(evt, menuName) {
-          var i, x, tablinks;
-          x = document.getElementsByClassName("menu");
-          for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-          }
-          tablinks = document.getElementsByClassName("tablink");
-          for (i = 0; i < x.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" w3-black", "");
-          }
-          document.getElementById(menuName).style.display = "block";
-          evt.currentTarget.firstElementChild.className += " w3-black";
-        }
-        document.getElementById("myLink").click();
-      </script>
-</body>
 
+    /*
+     * =========================================
+     * 4 SECOND LOADING SYSTEM
+     * =========================================
+     */
+
+    const loader = document.getElementById("loader");
+    const percentage = document.getElementById("percentage");
+
+    const duration = 4000;
+    const startTime = performance.now();
+
+
+    function updateLoader(currentTime) {
+
+        const elapsed = currentTime - startTime;
+
+        const progress = Math.min(
+            elapsed / duration,
+            1
+        );
+
+
+        /*
+         * Update percentage
+         */
+        const percent = Math.floor(progress * 100);
+
+        percentage.textContent = percent + "%";
+
+
+        /*
+         * Continue animation
+         */
+        if (progress < 1) {
+
+            requestAnimationFrame(updateLoader);
+
+        } else {
+
+            /*
+             * Loading is complete
+             */
+            setTimeout(() => {
+
+                loader.classList.add("finished");
+
+                /*
+                 * Restore scrolling
+                 */
+                document.body.style.overflow = "auto";
+
+
+                /*
+                 * Go to the main website
+                 */
+                setTimeout(() => {
+                    window.location.replace("main.html");
+                }, 300);
+
+            }, 100);
+
+        }
+    }
+
+
+    /*
+     * =========================================
+     * START LOADING
+     * =========================================
+     */
+
+    document.body.style.overflow = "hidden";
+
+    requestAnimationFrame(updateLoader);
+
+</script>
+</body>
 </html>
